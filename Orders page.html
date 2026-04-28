@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800;900&amp;family=Inter:wght@400;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9ff;
+    }
+
+    .font-h1,
+    .font-h2,
+    .font-h3,
+    .font-public-sans {
+      font-family: 'Public Sans', sans-serif;
+    }
+
+    /* Custom Accordion Logic with Details/Summary for no-JS simulation */
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details summary {
+      list-style: none;
+    }
+
+    details[open] .expand-icon {
+      transform: rotate(180deg);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    th,
+    td {
+      border: 1px solid #e7e8ed;
+    }
+  </style>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed-dim": "#ffb690",
+            "background": "#f8f9ff",
+            "on-background": "#191c20",
+            "inverse-surface": "#2e3135",
+            "primary-container": "#1b1b1b",
+            "on-tertiary-fixed-variant": "#3e4755",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "inverse-primary": "#c6c6c6",
+            "on-primary": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed": "#131c28",
+            "on-primary-fixed-variant": "#474747",
+            "on-primary-fixed": "#1b1b1b",
+            "on-surface-variant": "#4c4546",
+            "secondary": "#9d4300",
+            "on-secondary-fixed": "#341100",
+            "surface-dim": "#d8dae0",
+            "primary-fixed-dim": "#c6c6c6",
+            "primary": "#000000",
+            "on-secondary-fixed-variant": "#783200",
+            "inverse-on-surface": "#eff0f6",
+            "surface-tint": "#5e5e5e",
+            "surface-container-low": "#f2f3f9",
+            "error": "#ba1a1a",
+            "on-secondary-container": "#5c2400",
+            "primary-fixed": "#e2e2e2",
+            "tertiary": "#000000",
+            "surface-container-high": "#e7e8ee",
+            "secondary-container": "#fd761a",
+            "tertiary-container": "#131c28",
+            "surface-bright": "#f8f9ff",
+            "on-error": "#ffffff",
+            "outline-variant": "#cfc4c5",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#ffdbca",
+            "on-primary-container": "#848484",
+            "surface-container-highest": "#e1e2e8",
+            "on-tertiary-container": "#7b8493",
+            "on-surface": "#191c20",
+            "tertiary-fixed-dim": "#bec7d7",
+            "surface-variant": "#e1e2e8",
+            "tertiary-fixed": "#dae3f4",
+            "surface-container": "#eceef3",
+            "outline": "#7e7576",
+            "surface": "#f8f9ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "sm": "0.5rem",
+            "md": "1rem",
+            "lg": "1.5rem",
+            "gutter": "1rem",
+            "xs": "0.25rem",
+            "margin-page": "2rem",
+            "xl": "2.5rem",
+            "unit": "4px"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "button": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-caps": ["Inter"],
+            "h1": ["Public Sans"],
+            "h2": ["Public Sans"],
+            "h3": ["Public Sans"]
+          },
+          "fontSize": {
+            "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+            "button": ["15px", { "lineHeight": "1", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+            "h1": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "h2": ["32px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+
+<body class="bg-surface">
+  <!-- TopAppBar -->
+  <header
+    class="bg-white dark:bg-zinc-950 docked full-width top-0 z-50 border-b border-zinc-200 dark:border-zinc-800 flex justify-between items-center h-16 px-4 w-full fixed">
+    <div class="flex items-center gap-4">
+      <button class="transition-all duration-200 ease-in-out hover:bg-zinc-50 dark:hover:bg-zinc-900 p-2 rounded-lg">
+        <span class="material-symbols-outlined text-black dark:text-white" data-icon="menu">menu</span>
+      </button>
+      <h1 class="font-['Public_Sans'] font-semibold tracking-tight text-base text-black dark:text-white">طلباتي</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <button
+        class="transition-all duration-200 ease-in-out hover:bg-zinc-50 dark:hover:bg-zinc-900 p-2 rounded-lg relative">
+        <span class="material-symbols-outlined text-black dark:text-white"
+          data-icon="notifications">notifications</span>
+        <span class="absolute top-2 right-2 w-2 h-2 bg-secondary-container rounded-full"></span>
+      </button>
+    </div>
+  </header>
+  <main class="pt-20 pb-24 px-4 max-w-lg mx-auto">
+    <!-- Orders List (Collapsible) -->
+    <div class="space-y-4">
+      <details class="bg-white border border-outline-variant shadow-sm group">
+
+        <summary class="p-4 cursor-pointer">
+          <div class="flex justify-between items-start">
+
+            <div style="display: block;">
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <span class="text-label-caps font-label-caps text-on-surface-variant uppercase block">اسم
+                  الشركه</span>
+                <h3 class="text-[14px] font-bold text-primary">Be Bretty</h3>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <span class="text-label-caps font-label-caps text-on-surface-variant uppercase block">سعر الطلب
+                </span>
+
+                <h3 class="text-[14px] text-primary">1000</h3>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <p class="text-[12px] text-on-surface-variant mt-1">شبرا الخيمه </p>
+              <span
+                class="material-symbols-outlined transition-transform duration-200 expand-icon text-on-surface-variant"
+                data-icon="expand_more">expand_more</span>
+            </div>
+          </div>
+        </summary>
+
+        <div class="px-4 pb-4 border-t border-dashed border-outline-variant pt-4">
+          <div class="space-y-4 mb-6">
+
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+
+              <div class="flex items-start gap-3">
+                <div class="bg-surface-container rounded p-1.5">
+                  <span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="person">person</span>
+                </div>
+                <div>
+                  <span class="text-label-caps font-label-caps text-on-surface-variant block">اسم العميل</span>
+                  <p class="text-body-md font-semibold">سهيله وائل</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3" style="margin-left: 5rem;">
+                <div>
+                  <span class="text-label-caps font-label-caps text-on-surface-variant block">رقم الطلب</span>
+                  <h3 class="text-[14px] text-primary">#ORD-1</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="bg-surface-container rounded p-1.5">
+                <span class="material-symbols-outlined text-[20px] text-on-surface">
+                  payments
+                </span>
+              </div>
+              <div class="flex-1">
+                <span class="text-label-caps font-label-caps text-on-surface-variant block">رقم الهاتف</span>
+                <p class="text-body-sm font-body-sm">01126024462</p>
+              </div>
+              <a href="tel:01126024462" class="self-center">
+                <span class="material-symbols-outlined text-secondary">phone</span>
+              </a>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="bg-surface-container rounded p-1.5">
+                <span class="material-symbols-outlined text-[20px] t  ext-on-surface"
+                  data-icon="location_on">location_on</span>
+              </div>
+              <div class="flex-1">
+                <span class="text-label-caps font-label-caps text-on-surface-variant block">عنوان التسليم</span>
+                <p class="text-body-sm font-body-sm">كبري بيجام ش الجامع اخر بيت</p>
+              </div>
+              <a href="" target="_blank" class="self-center">
+                <span class="material-symbols-outlined text-secondary">map</span>
+              </a>
+            </div>
+
+            <div class="flex items-start gap-3" style="display: flex; ">
+              <table style="width: 100%;">
+                <tr>
+                  <th class="text-label-caps font-label-caps text-on-surface-variant text-right"
+                    style="padding: .3rem;">علامه مميزه
+                  </th>
+                  <th class="text-label-caps font-label-caps text-on-surface-variant text-right"
+                    style="padding: .3rem;">
+                    رقم العقار
+                  </th>
+                  <th class="text-label-caps font-label-caps text-on-surface-variant text-right"
+                    style="padding: .3rem;">
+                    الدور
+                  </th>
+                  <th class="text-label-caps font-label-caps text-on-surface-variant text-right"
+                    style="padding: .3rem;">
+                    رقم الشقة
+                  </th>
+                </tr>
+                <tr>
+                  <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                    اخر بيت ف الشارع
+                  </td>
+                  <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+
+                  </td>
+                  <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+
+                  </td>
+                  <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <button
+            class="w-full bg-primary text-on-primary font-button text-button py-4 transition-all active:scale-[0.98]">
+            تم التوصيل
+          </button>
+        </div>
+      </details>
+
+      <details class="bg-white border border-outline-variant shadow-sm group">
+        <summary class="p-4 cursor-pointer">
+          <div class="flex justify-between items-start">
+            <div style="display: block;">
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <span class="text-label-caps font-label-caps text-on-surface-variant uppercase block">اسم
+                  الشركه</span>
+                <h3 class="text-[14px] font-bold text-primary">Be Bretty</h3>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <span class="text-label-caps font-label-caps text-on-surface-variant uppercase block">سعر الطلب
+                </span>
+
+                <h3 class="text-[14px] text-primary">1000</h3>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <p class="text-[12px] text-on-surface-variant mt-1">سرايا القبه </p>
+              <span
+                class="material-symbols-outlined transition-transform duration-200 expand-icon text-on-surface-variant"
+                data-icon="expand_more">expand_more</span>
+            </div>
+          </div>
+        </summary>
+        <div class="px-4 pb-4 border-t border-dashed border-outline-variant pt-4">
+          <div class="space-y-4 mb-6">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+
+              <div class="flex items-start gap-3">
+                <div class="bg-surface-container rounded p-1.5">
+                  <span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="person">person</span>
+                </div>
+                <div>
+                  <span class="text-label-caps font-label-caps text-on-surface-variant block">اسم العميل</span>
+                  <p class="text-body-md font-semibold">ندي رضوان</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3" style="margin-left: 5rem;">
+                <div>
+                  <span class="text-label-caps font-label-caps text-on-surface-variant block">رقم الطلب</span>
+                  <h3 class="text-[14px] text-primary">#ORD-2</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="bg-surface-container rounded p-1.5">
+                <span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="call">call</span>
+              </div>
+              <div class="flex-1">
+                <span class="text-label-caps font-label-caps text-on-surface-variant block">رقم الهاتف</span>
+                <p class="text-body-sm font-body-sm">01012690669</p>
+              </div>
+              <a href="tel:01012690669" class="self-center">
+                <span class="material-symbols-outlined text-secondary">phone</span>
+              </a>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="bg-surface-container rounded p-1.5">
+                <span class="material-symbols-outlined text-[20px] t  ext-on-surface"
+                  data-icon="location_on">location_on</span>
+              </div>
+              <div class="flex-1">
+                <span class="text-label-caps font-label-caps text-on-surface-variant block">عنوان التسليم</span>
+                <p class="text-body-sm font-body-sm">27 ش طوماباي امام مستشفي الجنزوري</p>
+              </div>
+              <a href="https://maps.app.goo.gl/vZ5SxN7zy6knWVey6" target="_blank" class="self-center">
+                <span class="material-symbols-outlined text-secondary">map</span>
+              </a>
+            </div>
+
+            <table style="width: 100%;">
+              <tr>
+                <th class="text-label-caps font-label-caps text-on-surface-variant text-right" style="padding: .3rem;">
+                  علامه مميزه
+                </th>
+                <th class="text-label-caps font-label-caps text-on-surface-variant text-right" style="padding: .3rem;">
+                  رقم العقار
+                </th>
+                <th class="text-label-caps font-label-caps text-on-surface-variant text-right" style="padding: .3rem;">
+                  الدور
+                </th>
+                <th class="text-label-caps font-label-caps text-on-surface-variant text-right" style="padding: .3rem;">
+                  رقم الشقة
+                </th>
+              </tr>
+              <tr>
+                <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                  امام مستشفي الجنزوري
+                </td>
+                <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                  27
+                </td>
+                <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                  4
+                </td>
+                <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                  13
+                </td>
+              </tr>
+            </table>
+          </div>
+          <button
+            class="w-full bg-primary text-on-primary font-button text-button py-4 transition-all active:scale-[0.98]">
+            تم التوصيل
+          </button>
+        </div>
+      </details>
+
+      <details class="bg-white border border-outline-variant shadow-sm group">
+        <summary class="p-4 cursor-pointer">
+          <div class="flex justify-between items-start">
+            <div style="display: block;">
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <span class="text-label-caps font-label-caps text-on-surface-variant uppercase block">اسم
+                  الشركه</span>
+                <h3 class="text-[14px] font-bold text-primary">Be Bretty</h3>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <span class="text-label-caps font-label-caps text-on-surface-variant uppercase block">سعر الطلب
+                </span>
+
+                <h3 class="text-[14px] text-primary">900</h3>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <p class="text-[12px] text-on-surface-variant mt-1">جسر السويس </p>
+              <span
+                class="material-symbols-outlined transition-transform duration-200 expand-icon text-on-surface-variant"
+                data-icon="expand_more">expand_more</span>
+            </div>
+          </div>
+        </summary>
+        <div class="px-4 pb-4 border-t border-dashed border-outline-variant pt-4">
+          <div class="space-y-4 mb-6">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+
+              <div class="flex items-start gap-3">
+                <div class="bg-surface-container rounded p-1.5">
+                  <span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="person">person</span>
+                </div>
+                <div>
+                  <span class="text-label-caps font-label-caps text-on-surface-variant block">اسم العميل</span>
+                  <p class="text-body-md font-semibold">ام احمد</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3" style="margin-left: 5rem;">
+                <div>
+                  <span class="text-label-caps font-label-caps text-on-surface-variant block">رقم الطلب</span>
+                  <h3 class="text-[14px] text-primary">#ORD-3</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="bg-surface-container rounded p-1.5">
+                <span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="call">call</span>
+              </div>
+              <div class="flex-1">
+                <span class="text-label-caps font-label-caps text-on-surface-variant block">رقم الهاتف</span>
+                <p class="text-body-sm font-body-sm">01020202261</p>
+              </div>
+              <a href="tel:01020202261" class="self-center">
+                <span class="material-symbols-outlined text-secondary">phone</span>
+              </a>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="bg-surface-container rounded p-1.5">
+                <span class="material-symbols-outlined text-[20px] t  ext-on-surface"
+                  data-icon="location_on">location_on</span>
+              </div>
+              <div class="flex-1">
+                <span class="text-label-caps font-label-caps text-on-surface-variant block">عنوان التسليم</span>
+                <p class="text-body-sm font-body-sm">28 ش الجراج بجانب كنتاكي</p>
+              </div>
+              <a href="https://maps.app.goo.gl/1yjdvvpJjYqMzdwZ9" target="_blank" class="self-center">
+                <span class="material-symbols-outlined text-secondary">map</span>
+              </a>
+            </div>
+
+            <table style="width: 100%;">
+              <tr>
+                <th class="text-label-caps font-label-caps text-on-surface-variant text-right" style="padding: .3rem;">
+                  علامه مميزه
+                </th>
+                <th class="text-label-caps font-label-caps text-on-surface-variant text-right" style="padding: .3rem;">
+                  رقم العقار
+                </th>
+                <th class="text-label-caps font-label-caps text-on-surface-variant text-right" style="padding: .3rem;">
+                  الدور
+                </th>
+                <th class="text-label-caps font-label-caps text-on-surface-variant text-right" style="padding: .3rem;">
+                  رقم الشقة
+                </th>
+              </tr>
+              <tr>
+                <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                  يمين الاسانسير
+                </td>
+                <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                  28
+                </td>
+                <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                  2
+                </td>
+                <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                  يمين الاسانسير
+                </td>
+              </tr>
+            </table>
+          </div>
+          <button
+            class="w-full bg-primary text-on-primary font-button text-button py-4 transition-all active:scale-[0.98]">
+            تم التوصيل
+          </button>
+        </div>
+      </details>
+
+      <details class="bg-white border border-outline-variant shadow-sm group">
+        <summary class="p-4 cursor-pointer">
+          <div class="flex justify-between items-start">
+            <div style="display: block;">
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <span class="text-label-caps font-label-caps text-on-surface-variant uppercase block">اسم
+                  الشركه</span>
+                <h3 class="text-[14px] font-bold text-primary">Be Bretty</h3>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <span class="text-label-caps font-label-caps text-on-surface-variant uppercase block">سعر الطلب
+                </span>
+
+                <h3 class="text-[14px] text-primary">1000</h3>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <p class="text-[12px] text-on-surface-variant mt-1">مدينه نصر </p>
+              <span
+                class="material-symbols-outlined transition-transform duration-200 expand-icon text-on-surface-variant"
+                data-icon="expand_more">expand_more</span>
+            </div>
+          </div>
+        </summary>
+        <div class="px-4 pb-4 border-t border-dashed border-outline-variant pt-4">
+          <div class="space-y-4 mb-6">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+
+              <div class="flex items-start gap-3">
+                <div class="bg-surface-container rounded p-1.5">
+                  <span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="person">person</span>
+                </div>
+                <div>
+                  <span class="text-label-caps font-label-caps text-on-surface-variant block">اسم العميل</span>
+                  <p class="text-body-md font-semibold">امل محمد</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3" style="margin-left: 5rem;">
+                <div>
+                  <span class="text-label-caps font-label-caps text-on-surface-variant block">رقم الطلب</span>
+                  <h3 class="text-[14px] text-primary">#ORD-4</h3>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="bg-surface-container rounded p-1.5">
+                <span class="material-symbols-outlined text-[20px] text-on-surface" data-icon="call">call</span>
+              </div>
+              <div class="flex-1">
+                <span class="text-label-caps font-label-caps text-on-surface-variant block">رقم الهاتف</span>
+                <p class="text-body-sm font-body-sm">01115276599</p>
+              </div>
+              <a href="tel:01115276599" class="self-center">
+                <span class="material-symbols-outlined text-secondary">phone</span>
+              </a>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="bg-surface-container rounded p-1.5">
+                <span class="material-symbols-outlined text-[20px] t  ext-on-surface"
+                  data-icon="location_on">location_on</span>
+              </div>
+              <div class="flex-1">
+                <span class="text-label-caps font-label-caps text-on-surface-variant block">عنوان التسليم</span>
+                <p class="text-body-sm font-body-sm">6 ش اسماعيل المرشدي متفرع من احمد الزمر</p>
+              </div>
+              <a href="https://maps.app.goo.gl/1yjdvvpJjYqMzdwZ9" target="_blank" class="self-center">
+                <span class="material-symbols-outlined text-secondary">map</span>
+              </a>
+            </div>
+
+            <table style="width: 100%;">
+              <tr>
+                <th class="text-label-caps font-label-caps text-on-surface-variant text-right" style="padding: .3rem;">
+                  علامه مميزه
+                </th>
+                <th class="text-label-caps font-label-caps text-on-surface-variant text-right" style="padding: .3rem;">
+                  رقم العقار
+                </th>
+                <th class="text-label-caps font-label-caps text-on-surface-variant text-right" style="padding: .3rem;">
+                  الدور
+                </th>
+                <th class="text-label-caps font-label-caps text-on-surface-variant text-right" style="padding: .3rem;">
+                  رقم الشقة
+                </th>
+              </tr>
+              <tr>
+                <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                  بجانب قطونيل واخر العنقود
+                </td>
+                <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                  6 8 801
+                </td>
+                <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                  8
+                </td>
+                <td class="text-body-sm font-body-sm text-on-surface" style="padding: .3rem;">
+                  801
+                </td>
+              </tr>
+            </table>
+
+          </div>
+          <button
+            class="w-full bg-primary text-on-primary font-button text-button py-4 transition-all active:scale-[0.98]">
+            تم التوصيل
+          </button>
+        </div>
+      </details>
+
+    </div>
+  </main>
+  <!-- BottomNavBar -->
+  <nav
+    class="fixed bottom-0 left-0 w-full h-16 flex justify-around items-center bg-white dark:bg-zinc-950 px-2 pb-safe border-t border-zinc-200 dark:border-zinc-800 z-50">
+    <a class="flex flex-col items-center justify-center text-[#fd761a] dark:text-[#fd761a] pt-1 transition-opacity active:opacity-70"
+      href="#">
+      <span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+      <span class="font-['Public_Sans'] text-[10px] uppercase font-bold tracking-tighter">Orders</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-600 pt-1 transition-opacity active:opacity-70 hover:text-black dark:hover:text-white"
+      href="#">
+      <span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+      <span class="font-['Public_Sans'] text-[10px] uppercase font-bold tracking-tighter">Fleet</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-600 pt-1 transition-opacity active:opacity-70 hover:text-black dark:hover:text-white"
+      href="#">
+      <span class="material-symbols-outlined" data-icon="distance">distance</span>
+      <span class="font-['Public_Sans'] text-[10px] uppercase font-bold tracking-tighter">Tracking</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-600 pt-1 transition-opacity active:opacity-70 hover:text-black dark:hover:text-white"
+      href="#">
+      <span class="material-symbols-outlined" data-icon="person">person</span>
+      <span class="font-['Public_Sans'] text-[10px] uppercase font-bold tracking-tighter">Profile</span>
+    </a>
+  </nav>
+</body>
+
+</html>
