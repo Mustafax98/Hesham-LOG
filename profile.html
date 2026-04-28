@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;900&amp;family=Inter:wght@400;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#c6c6c6",
+                        "tertiary-fixed-dim": "#bec7d7",
+                        "on-tertiary-fixed": "#131c28",
+                        "surface-container-low": "#f2f3f9",
+                        "surface-container-high": "#e7e8ee",
+                        "surface-tint": "#5e5e5e",
+                        "secondary-fixed-dim": "#ffb690",
+                        "on-error-container": "#93000a",
+                        "secondary": "#9d4300",
+                        "primary": "#000000",
+                        "background": "#f8f9ff",
+                        "surface-container-highest": "#e1e2e8",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e1e2e8",
+                        "surface-dim": "#d8dae0",
+                        "primary-fixed": "#e2e2e2",
+                        "primary-container": "#1b1b1b",
+                        "tertiary": "#000000",
+                        "secondary-fixed": "#ffdbca",
+                        "on-background": "#191c20",
+                        "surface-container": "#eceef3",
+                        "secondary-container": "#fd761a",
+                        "on-error": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "on-primary-container": "#848484",
+                        "tertiary-container": "#131c28",
+                        "on-primary-fixed": "#1b1b1b",
+                        "on-surface": "#191c20",
+                        "on-secondary-fixed": "#341100",
+                        "outline-variant": "#cfc4c5",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#474747",
+                        "on-secondary-fixed-variant": "#783200",
+                        "inverse-surface": "#2e3135",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#4c4546",
+                        "on-tertiary-container": "#7b8493",
+                        "on-tertiary-fixed-variant": "#3e4755",
+                        "outline": "#7e7576",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#c6c6c6",
+                        "inverse-on-surface": "#eff0f6",
+                        "tertiary-fixed": "#dae3f4",
+                        "on-secondary-container": "#5c2400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "0.25rem",
+                        "sm": "0.5rem",
+                        "lg": "1.5rem",
+                        "gutter": "1rem",
+                        "margin-page": "2rem",
+                        "md": "1rem",
+                        "xl": "2.5rem",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Public Sans"],
+                        "body-md": ["Inter"],
+                        "h2": ["Public Sans"],
+                        "h1": ["Public Sans"],
+                        "body-sm": ["Inter"],
+                        "button": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+    <!-- TopAppBar -->
+    <header
+        class="flex items-center w-full px-4 h-16 bg-white dark:bg-neutral-950 border-b border-[#e5eeff] dark:border-neutral-800 sticky top-0 z-50">
+        <div class="flex items-center gap-4 w-full">
+            <span class="material-symbols-outlined text-neutral-900 dark:text-neutral-50 cursor-pointer"
+                data-icon="arrow_forward">arrow_forward</span>
+            <h1 class="font-public-sans font-semibold text-lg tracking-tight text-neutral-900 dark:text-neutral-50">
+                Driver Profile</h1>
+        </div>
+    </header>
+    <main class="px-4 py-6 space-y-6 max-w-md mx-auto">
+        <!-- Profile Header Card -->
+        <section class="bg-surface-container-lowest border border-[#e5eeff] p-lg flex flex-col items-center gap-4">
+            <div class="relative">
+                <img alt="Driver Profile"
+                    class="w-24 h-24 rounded-full border-4 border-surface-container-high object-cover"
+                    data-alt="Professional portrait of a middle-aged Arab man with a neat beard, wearing a corporate polo shirt, clean lighting, outdoor urban setting"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg_wFtfQz-vRpc0HWxjY8YIDxuy-bk18poUjqyvlZXnrkPp0LvoentCfW2NTHjNBVIT2dyCUVPJjYQaBQytSnNWJ6peBuiGmSQLbH-gHOPAoIB42UejHUZ6BPjTz54WDpVB4uQEsrcXBhS0UnlZYXhArSpEcwo3QX23Am6g4Y_gLGQq2aPebnf3ZWmA8kpJ3jGPZcHO0nygWF-rqD9iq86U3ae3eUTkVTPm1U9-B_sITG-EdcVjoLxzm3S_T4QgzNgNiDDLLTRog" />
+                <div class="absolute bottom-0 right-0 bg-secondary-container p-1 border-2 border-white">
+                    <span class="material-symbols-outlined text-white text-sm" data-icon="edit">edit</span>
+                </div>
+            </div>
+            <div class="text-center">
+                <h2 class="font-h2 text-h2 text-primary">هشام ظاظا</h2>
+                <p class="font-label-caps text-label-caps text-on-surface-variant mt-1">DRIVER ID: 4920</p>
+            </div>
+        </section>
+        <!-- Stats Grid -->
+        <section class="grid grid-cols-3 gap-xs">
+            <div class="bg-surface-container-lowest border border-[#e5eeff] p-md text-center">
+                <p class="font-label-caps text-[10px] text-on-surface-variant mb-1">الموثوقية</p>
+                <p class="font-h3 text-lg text-primary font-bold">98%</p>
+            </div>
+            <div class="bg-surface-container-lowest border border-[#e5eeff] p-md text-center">
+                <p class="font-label-caps text-[10px] text-on-surface-variant mb-1">التقييم</p>
+                <div class="flex items-center justify-center gap-1">
+                    <p class="font-h3 text-lg text-primary font-bold">4.92</p>
+                    <span class="material-symbols-outlined text-secondary-container text-xs" data-icon="star"
+                        style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+            </div>
+            <div class="bg-surface-container-lowest border border-[#e5eeff] p-md text-center">
+                <p class="font-label-caps text-[10px] text-on-surface-variant mb-1">الطلبات</p>
+                <p class="font-h3 text-lg text-primary font-bold">1,284</p>
+            </div>
+        </section>
+        <!-- Accordions -->
+        <div class="space-y-sm">
+            <!-- Personal Info -->
+            <div class="bg-white border border-[#e5eeff]">
+                <button
+                    class="w-full px-md py-4 flex items-center justify-between hover:bg-[#f8f9ff] transition-colors">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+                        <span class="font-button text-body-md font-bold">المعلومات الشخصية</span>
+                    </div>
+                    <span class="material-symbols-outlined text-on-surface-variant"
+                        data-icon="expand_more">expand_more</span>
+                </button>
+                <div class="px-md pb-4 space-y-4">
+                    <div>
+                        <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">الاسم الكامل</p>
+                        <p class="font-body-md text-primary font-semibold">هشام ظاظا</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">رقم الهاتف</p>
+                            <p class="font-body-md text-primary font-semibold" dir="ltr">+201234567891</p>
+                        </div>
+                        <div>
+                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">البريد الإلكتروني
+                            </p>
+                            <p class="font-body-md text-primary font-semibold">ahmed.m@Quick-xos.com</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">العنوان</p>
+                        <p class="font-body-md text-primary font-semibold">23 ش حسن مأمون مدينه نصر , القاهره
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Vehicle Details -->
+            <div class="bg-white border border-[#e5eeff]">
+                <button
+                    class="w-full px-md py-4 flex items-center justify-between hover:bg-[#f8f9ff] transition-colors">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary"
+                            data-icon="local_shipping">local_shipping</span>
+                        <span class="font-button text-body-md font-bold">تفاصيل المركبة</span>
+                    </div>
+                    <span class="material-symbols-outlined text-on-surface-variant"
+                        data-icon="expand_more">expand_more</span>
+                </button>
+                <div class="px-md pb-4 space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">نوع المركبة</p>
+                            <p class="font-body-md text-primary font-semibold">دراجه ناريه</p>
+                        </div>
+                        <div>
+                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">رقم اللوحة</p>
+                            <p class="font-body-md text-primary font-semibold">أ ب ج ١٢٣٤</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="font-label-caps text-label-caps text-on-surface-variant mb-1">موديل المركبة</p>
+                        <p class="font-body-md text-primary font-semibold">هوجن 3 2022</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Official Documents -->
+            <div class="bg-white border border-[#e5eeff]">
+                <button
+                    class="w-full px-md py-4 flex items-center justify-between hover:bg-[#f8f9ff] transition-colors">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary" data-icon="description">description</span>
+                        <span class="font-button text-body-md font-bold">الوثائق الرسمية</span>
+                    </div>
+                    <span class="material-symbols-outlined text-on-surface-variant"
+                        data-icon="expand_more">expand_more</span>
+                </button>
+                <div class="px-md pb-4 space-y-3">
+
+                    <div class="flex items-center justify-between p-3 bg-surface-container-low">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm text-on-surface-variant"
+                                data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <span class="font-body-sm">بطاقه الرقم القومي</span>
+                        </div>
+                        <span
+                            class="px-2 py-0.5 bg-green-100 text-green-800 text-[10px] font-bold uppercase rounded-sm">سارية</span>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-surface-container-low">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm text-on-surface-variant"
+                                data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <span class="font-body-sm">رخصة القيادة</span>
+                        </div>
+                        <span
+                            class="px-2 py-0.5 bg-green-100 text-green-800 text-[10px] font-bold uppercase rounded-sm">سارية</span>
+
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-error-container/20 border border-error/10">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm text-error" data-icon="warning"
+                                style="font-variation-settings: 'FILL' 1;">warning</span>
+                            <span class="font-body-sm text-error font-semibold">رخصه المركبة</span>
+                        </div>
+                        <span class="px-2 py-0.5 bg-error text-white text-[10px] font-bold uppercase rounded-sm">تطلب
+                            تحديث</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Actions -->
+        <div class="flex flex-col gap-sm pt-4">
+            <button
+                class="w-full h-12 bg-primary text-on-primary font-button flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
+                <span>حفظ التغييرات</span>
+            </button>
+            <button
+                class="w-full h-12 bg-transparent border border-[#e5eeff] text-primary font-button flex items-center justify-center gap-2 transition-colors hover:bg-surface-container-low">
+                <span class="material-symbols-outlined text-lg" data-icon="support_agent">support_agent</span>
+                <span>الاتصال بالدعم</span>
+            </button>
+        </div>
+    </main>
+    <!-- BottomNavBar -->
+    <nav
+        class="fixed bottom-0 left-0 w-full h-16 flex justify-around items-center bg-white dark:bg-zinc-950 px-2 pb-safe border-t border-zinc-200 dark:border-zinc-800 z-50">
+        <a class="flex flex-col items-center justify-center text-[#fd761a] dark:text-[#fd761a] pt-1 transition-opacity active:opacity-70"
+            href="orders.html">
+            <span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+            <span class="font-['Public_Sans'] text-[10px] uppercase font-bold tracking-tighter">Orders</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-600 pt-1 transition-opacity active:opacity-70 hover:text-black dark:hover:text-white"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="distance">finance</span>
+            <span class="font-['Public_Sans'] text-[10px] uppercase font-bold tracking-tighter">Accounts</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-600 pt-1 transition-opacity active:opacity-70 hover:text-black dark:hover:text-white"
+            href="profile.html">
+            <span class="material-symbols-outlined" data-icon="person">person</span>
+            <span class="font-['Public_Sans'] text-[10px] uppercase font-bold tracking-tighter">Profile</span>
+        </a>
+    </nav>
+</body>
+
+</html>
