@@ -79,31 +79,46 @@
     <main class="pt-20 pb-24 px-4 max-w-lg mx-auto">
         <!-- الحاوية الديناميكية التي سيتم حقن الطلبات داخلها -->
         <div id="orders-container" class="space-y-4">
-            <p class="text-center text-zinc-500 py-4">جاري تحميل الطلبات من جوجل شيت...</p>
+            <p class="text-center text-zinc-500 py-4">جاري التحميل ..</p>
         </div>
     </main>
 
     <!-- BottomNavBar -->
     <nav
         class="fixed bottom-0 left-0 w-full h-16 flex justify-around items-center bg-white dark:bg-zinc-950 px-2 pb-safe border-t border-zinc-200 dark:border-zinc-800 z-50">
-        <a class="flex flex-col items-center justify-center text-[#fd761a]" href="orders.html">
+
+
+        <div id="pending-section">
+            <div id="orders-container">
+
+            </div>
+        </div>
+
+        <div id="delivered-section" class="hidden">
+            <div id="delivered-container"></div>
+        </div>
+
+        <button class="flex flex-col items-center justify-center text-[#fd761a]" onclick="showTab('pending')">
             <span class="material-symbols-outlined">assignment</span>
-            <span class="font-['Public_Sans'] text-[10px] uppercase font-bold tracking-tighter">Orders</span>
-        </a>
-        <a class="flex flex-col items-center justify-center text-zinc-400" href="#">
-            <span class="material-symbols-outlined">finance</span>
-            <span class="font-['Public_Sans'] text-[10px] uppercase font-bold tracking-tighter">Accounts</span>
-        </a>
+            <span>Orders</span>
+        </button>
+
+        <button class="flex flex-col items-center justify-center text-zinc-400" onclick="showTab('delivered')">
+            <span class="material-symbols-outlined">assignment</span>
+            <span>Delivered</span>
+        </button>
+
+        
         <a class="flex flex-col items-center justify-center text-zinc-400" href="profile.html">
             <span class="material-symbols-outlined">person</span>
             <span class="font-['Public_Sans'] text-[10px] uppercase font-bold tracking-tighter">Profile</span>
         </a>
     </nav>
 
-    <!-- السكريبت المسؤول عن جلب البيانات وتحديثها تلقائياً -->
     <script>
+        
         // ⚠️ ضع هنا الرابط الخاص بك الذي حصلت عليه (سواء رابط Sheety أو SheetDB أو سكريبت جوجل)
-        const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycby2uaIyMoOKzW8ZGrNeWcYjl9k0vZOGQnCtHn8PTdmH5Z_lQFJcWIyVDPou2gdzK46MAg/exec';
+        const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbxJb8ZGEBFA8wciz8NWg5JlAzQxV9KLfVh3LcL4pk335xIF7Gf13_0Bzyi70Ny4tA8nmg/exec';
 
         // ⚠️ رقم الواتساب (بدون + أو 00)
         const WHATSAPP_NUMBER = '+201063942602';
@@ -228,8 +243,11 @@
                                 </tbody>
                               </table>
                             </div>
-                            <button class="w-full bg-primary text-white font-button text-button py-4 transition-all active:scale-[0.98]">
-                              تم التوصيل
+
+                            <button 
+                                onclick="markAsDelivered('${orderId}')" 
+                                class="w-full bg-black text-white font-button text-button py-4 transition-all active:scale-[0.98]">
+                                تم التوصيل
                             </button>
                           </div>
                         </details>
@@ -241,9 +259,42 @@
                 document.getElementById('orders-container').innerHTML = '<p class="text-center text-red-500 py-4">فشل في تحميل البيانات، يرجى التحقق من الرابط.</p>';
             }
         }
+        async function markAsDelivered(orderId) {
+            const btn = event.target;
+            btn.innerText = "جاري التحديث...";
+            btn.disabled = true;
 
+            try {
+                // أضفنا mode: 'no-cors'
+                const response = await fetch(SHEET_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ orderId: orderId })
+                });
+
+                // ملاحظة: مع no-cors، لا يمكنك قراءة نتيجة الـ JSON، لذا سنفترض النجاح
+                btn.innerText = "تم التوصيل!";
+                btn.classList.replace('bg-black', 'bg-green-600');
+
+                setTimeout(() => {
+                    loadOrders();
+                }, 1000);
+
+            } catch (e) {
+                console.error("خطأ في الاتصال:", e);
+                btn.innerText = "خطأ!";
+                btn.disabled = false;
+            }
+        }
         // استدعاء الدالة عند تحميل الصفحة تلقائياً
         window.onload = loadOrders;
+
+        // تحديث البيانات كل 5000 مللي ثانية (أي 5 ثواني)
+        setInterval(loadOrders, 5000);
+
     </script>
 </body>
 
