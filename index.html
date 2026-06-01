@@ -319,7 +319,7 @@
                                 ` : `
                                 <div class="flex grid-cols-1 gap-2">
                                     <button onclick="markAsDelivered(event, '${orderId}')" class="w-full bg-black text-white font-button py-3 transition-all active:scale-[0.98]">
-                                        تم التسليم
+                                        تم التوصيل
                                     </button>
                                     <button onclick="markAsPostponed(event, '${orderId}')" class="w-full bg-amber-600 text-white font-button py-3 transition-all active:scale-[0.98]">
                                         تأجيل
@@ -346,7 +346,7 @@
                 if (!hasDelivered) deliveredContainer.innerHTML = '<p class="text-center text-zinc-500 py-4">لا توجد طلبات مستلمة أو ملغاة.</p>';
 
                 document.getElementById('wallet-total').innerText = totalWalletAmount.toLocaleString('ae-EG');
-ب
+
                 filterDeliveredOrders();
 
             } catch (error) {
@@ -384,7 +384,7 @@
                     body: JSON.stringify({ orderId: orderId, action: 'deliver' })
                 });
 
-                btn.innerText = "تم التسليم!";
+                btn.innerText = "تم التوصيل!";
                 btn.className = "w-full bg-green-600 text-white font-button py-4 text-center rounded";
 
                 setTimeout(() => { loadOrders(); }, 1000);
