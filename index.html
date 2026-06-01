@@ -1,229 +1,409 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en">
+<html dir="rtl" lang="ar">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Quick-XOS | Authenticate</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;900&amp;family=Inter:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "secondary": "#9d4300",
-                        "surface-container-low": "#f2f3f9",
-                        "secondary-fixed": "#ffdbca",
-                        "on-tertiary-container": "#7b8493",
-                        "on-secondary": "#ffffff",
-                        "primary-fixed-dim": "#c6c6c6",
-                        "on-primary-fixed-variant": "#474747",
-                        "error": "#ba1a1a",
-                        "surface-container-lowest": "#ffffff",
-                        "on-surface-variant": "#4c4546",
-                        "on-tertiary-fixed": "#131c28",
-                        "background": "#f8f9ff",
-                        "on-primary-fixed": "#1b1b1b",
-                        "surface-container-high": "#e7e8ee",
-                        "on-secondary-fixed": "#341100",
-                        "surface-tint": "#5e5e5e",
-                        "on-background": "#191c20",
-                        "on-error": "#ffffff",
-                        "tertiary-fixed-dim": "#bec7d7",
-                        "surface-container-highest": "#e1e2e8",
-                        "error-container": "#ffdad6",
-                        "surface-variant": "#e1e2e8",
-                        "surface-dim": "#d8dae0",
-                        "on-secondary-fixed-variant": "#783200",
-                        "tertiary-fixed": "#dae3f4",
-                        "secondary-container": "#fd761a",
-                        "primary": "#000000",
-                        "secondary-fixed-dim": "#ffb690",
-                        "on-primary": "#ffffff",
-                        "on-tertiary": "#ffffff",
-                        "surface-bright": "#f8f9ff",
-                        "inverse-on-surface": "#eff0f6",
-                        "surface-container": "#eceef3",
-                        "outline-variant": "#cfc4c5",
-                        "primary-fixed": "#e2e2e2",
-                        "on-tertiary-fixed-variant": "#3e4755",
-                        "on-primary-container": "#848484",
-                        "on-error-container": "#93000a",
-                        "tertiary-container": "#131c28",
-                        "inverse-primary": "#c6c6c6",
-                        "on-secondary-container": "#5c2400",
-                        "tertiary": "#000000",
-                        "outline": "#7e7576",
-                        "primary-container": "#1b1b1b",
-                        "on-surface": "#191c20",
-                        "inverse-surface": "#2e3135",
-                        "surface": "#f8f9ff"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "spacing": {
-                        "sm": "0.5rem",
-                        "margin-page": "2rem",
-                        "unit": "4px",
-                        "lg": "1.5rem",
-                        "gutter": "1rem",
-                        "xs": "0.25rem",
-                        "xl": "2.5rem",
-                        "md": "1rem"
-                    },
-                    "fontFamily": {
-                        "h3": ["Public Sans"],
-                        "h2": ["Public Sans"],
-                        "body-lg": ["Inter"],
-                        "h1": ["Public Sans"],
-                        "button": ["Inter"],
-                        "label-caps": ["Inter"],
-                        "body-sm": ["Inter"],
-                        "body-md": ["Inter"]
-                    },
-                    "fontSize": {
-                        "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
-                        "h2": ["32px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
-                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "h1": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "button": ["15px", { "lineHeight": "1", "fontWeight": "600" }],
-                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
-                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
-                    }
-                },
-            },
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght=400;600;700;800;900&amp;family=Inter:wght=400;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
     <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
         body {
+            font-family: 'Inter', sans-serif;
             background-color: #f8f9ff;
-            background-image:
-                radial-gradient(#e5eeff 1px, transparent 1px);
-            background-size: 24px 24px;
         }
-    </style>
-    <style>
-        body {
-            min-height: max(884px, 100dvh);
+
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details summary {
+            list-style: none;
+        }
+
+        details[open] .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        th, td {
+            border: 1px solid #e7e8ed;
         }
     </style>
 </head>
 
-<body class="font-body-md text-on-surface antialiased">
-    <!-- TopAppBar Section -->
-    <header
-        class="fixed top-0 w-full z-50 bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 flex justify-between items-center h-16 px-6 w-full">
-        <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-secondary text-[40px]"
-                data-icon="local_shipping">local_shipping</span>
-            <span
-                class="font-['Public_Sans'] uppercase tracking-widest font-bold text-sm text-zinc-950 dark:text-zinc-50">Quick-XOS</span>
+<body class="bg-surface">
+    <header class="bg-white dark:bg-zinc-950 docked full-width top-0 z-50 border-b border-zinc-200 dark:border-zinc-800 flex justify-between items-center h-16 px-4 w-full fixed">
+        <div class="flex items-center gap-2">
+            <button class="transition-all duration-200 ease-in-out hover:bg-zinc-50 dark:hover:bg-zinc-900 p-2 rounded-lg relative">
+                <span class="material-symbols-outlined text-black dark:text-white">notifications</span>
+                <span class="absolute top-2 right-2 w-2 h-2 bg-secondary-container rounded-full"></span>
+            </button>
+        </div>
+        <div class="flex items-center gap-4">
+            <p class="font-['Public_Sans'] font-semibold tracking-tight text-base text-black dark:text-white">أهلاً بك يا احمد</p>
+            <h1 class="font-['Public_Sans'] font-semibold tracking-tight text-base text-black dark:text-white">Quick-XOS</h1>
         </div>
     </header>
-    <main class="pt-24 pb-12 px-6 min-h-screen flex flex-col items-center">
-        <!-- Hero Section -->
-        <div class="w-full max-w-md mt-8 mb-10">
-            <div class="flex items-center gap-2 mb-4">
-                <span
-                    class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.2em]">Operations
-                    Portal</span>
-            </div>
-            <h1 class="font-h1 text-h1 text-primary leading-tight">
-                The global standard for <span class="text-secondary-container">fleet precision.</span>
-            </h1>
-        </div>
-        <!-- Login Card -->
-        <div class="w-full max-w-md bg-white border border-surface-container-high rounded-lg p-8 shadow-sm">
-            <div class="mb-8">
-                <p class="font-body-md text-on-surface-variant">Sign in to your operation hub</p>
-            </div>
-            <form class="space-y-6">
-                <!-- Phone Input -->
-                <div class="space-y-2">
-                    <label class="font-label-caps text-label-caps text-on-surface-variant block">PHONE NUMBER</label>
-                    <div class="flex">
-                        <div
-                            class="flex items-center px-4 bg-surface-container-low border border-outline-variant border-r-0 rounded-l-lg font-body-md text-primary">
-                            +20
-                        </div>
-                        <input
-                            class="w-full px-4 py-3 border border-outline-variant rounded-r-lg focus:ring-0 focus:border-primary font-body-md placeholder:text-outline-variant"
-                            placeholder="1063942602" type="tel" />
-                    </div>
-                </div>
-                <!-- Authenticate Button -->
-                <a href="orders.html"
-                    class="w-full bg-primary text-on-primary py-4 rounded-lg font-button text-button flex items-center justify-center gap-2 hover:opacity-90 transition-opacity uppercase tracking-widest">
-                    <span>AUTHENTICATE</span>
-                    <span class="material-symbols-outlined text-[20px]">login</span>
-                </a>
-            </form>
-            <!-- Divider -->
-            <div class="relative my-10">
-                <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t border-surface-container-high"></div>
-                </div>
-                <div class="relative flex justify-center text-xs uppercase">
-                    <span class="bg-white px-4 text-outline font-label-caps tracking-widest">CORPORATE IDENTITY</span>
-                </div>
-            </div>
-            <!-- Social Logins -->
-            <div class="grid grid-cols-2 gap-4">
-                <button
-                    class="flex items-center justify-center h-12 border border-surface-container text-on-surface font-label-caps hover:bg-surface-container transition-colors gap-xs">
-                    <img alt="Google" class="w-5 h-5 grayscale opacity-70"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDl-aEh5EFsI6eE6vyGVs6mrsijMGw-kAsHhp_4hYK_vAMslvzivQgACDsvsm2ELxp8L9P5aznmFvK8vcQTKA6EZATKAccv-iJqhv9UX69h_a2mspNGc_SHMWyem9qrNdEMrUrpO5BErCHjP6mecapwnLnCdu_eWPmlp5xiu0Of-16yNAJkQ2nW_ZbT2cDBtg0jJWxyqDmP07IPSpQ4i7Y_onzCTrehwPGzdDuYR4Hnoqvx-WkVmhY0nf_76-LwuTSyhr4Md1FTg" />
-                    GOOGLE
-                </button>
-                <button
-                    class="flex items-center justify-center gap-3 py-3 border border-surface-container-high rounded-lg hover:bg-surface-container-low transition-colors font-button text-button uppercase">
-                    <span class="material-symbols-outlined text-[20px]" data-icon="corporate_fare">corporate_fare</span>
-                    <span>SSO</span>
-                </button>
-            </div>
-            <!-- Links -->
-            <div class="mt-8 flex flex-col gap-3">
-                <a class="font-label-caps text-label-caps text-primary hover:underline flex items-center justify-between group"
-                    dir="rtl" href="#">
-                    <span>نسيت كلمة المرور</span>
-                    <span
-                        class="material-symbols-outlined text-xs rotate-180 group-hover:-translate-x-1 transition-transform"
-                        data-icon="arrow_forward">arrow_forward</span>
-                </a>
+
+    <main class="pt-20 pb-24 px-4 max-w-lg mx-auto">
+        <div id="pending-section">
+            <div id="orders-container" class="space-y-4">
+                <p class="text-center text-zinc-500 py-4">جاري التحميل ..</p>
             </div>
         </div>
-        <!-- System Background Decorative Element -->
-        <!-- Footer -->
-        <footer class="mt-auto pt-12 text-center">
-            <p class="font-label-caps text-[10px] text-outline-variant tracking-[0.3em] uppercase">
-                SYSTEM ID: L-OS-2026
-            </p>
-            <div class="mt-4 flex justify-center gap-4 text-outline-variant">
-                <span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
-                <span class="material-symbols-outlined text-sm" data-icon="encrypted">encrypted</span>
-                <span class="material-symbols-outlined text-sm" data-icon="hub">hub</span>
+
+        <div id="delivered-section" class="hidden space-y-4">
+            <div class="flex items-center gap-2 bg-white p-2 border border-zinc-200 shadow-sm mb-4 rounded-lg">
+                <span class="text-xs font-bold text-zinc-500 pr-1">تصفية:</span>
+                <select id="status-filter" onchange="filterDeliveredOrders()" class="flex-1 bg-zinc-50 border border-zinc-300 text-zinc-800 text-sm rounded-md p-1.5 focus:ring-black focus:border-black">
+                    <option value="all">كل الطلبات (تم التسليم + الملغي)</option>
+                    <option value="delivered">تم التسليم فقط</option>
+                    <option value="canceled">الملغي فقط</option>
+                </select>
             </div>
-        </footer>
+            <div id="delivered-container" class="space-y-4"></div>
+        </div>
+
+        <div id="profile-section" class="hidden space-y-6">
+            <div class="bg-white p-6 border border-zinc-200 shadow-sm rounded-xl text-center">
+                <div class="w-20 h-20 bg-zinc-100 rounded-full flex items-center justify-center mx-auto mb-3 border border-zinc-300">
+                    <span class="material-symbols-outlined text-[40px] text-zinc-600">account_circle</span>
+                </div>
+                <h2 class="text-lg font-bold text-zinc-800">احمد</h2>
+            </div>
+
+            <div class="bg-gradient-to-br from-zinc-900 to-black p-6 text-white shadow-md rounded-xl relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 opacity-10">
+                    <span class="material-symbols-outlined text-[120px]">payments</span>
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-sm font-medium text-zinc-400">إجمالي المحفظة الحالية</span>
+                    <span class="material-symbols-outlined text-green-400">account_balance_wallet</span>
+                </div>
+                <div class="flex items-baseline gap-2">
+                    <span id="wallet-total" class="text-3xl font-black tracking-tight text-white">0</span>
+                    <span class="text-sm font-bold text-green-400">جنيه مصري</span>
+                </div>
+                <p class="text-[11px] text-zinc-400 mt-4 border-t border-zinc-800 pt-3">
+                    * يتم احتساب الطلبات المسلمة بنجاح فقط وتجاهل الطلبات الملغية.
+                </p>
+            </div>
+        </div>
     </main>
 
+    <nav class="fixed bottom-0 left-0 w-full h-16 flex justify-around items-center bg-white dark:bg-zinc-950 px-2 pb-safe border-t border-zinc-200 dark:border-zinc-800 z-50">
+        <button id="btn-pending" class="flex flex-col items-center justify-center text-[#fd761a]" onclick="showTab('pending')">
+            <span class="material-symbols-outlined">assignment</span>
+            <span class="text-xs">Orders</span>
+        </button>
 
+        <button id="btn-delivered" class="flex flex-col items-center justify-center text-zinc-400" onclick="showTab('delivered')">
+            <span class="material-symbols-outlined">assignment_turned_in</span>
+            <span class="text-xs">Delivered</span>
+        </button>
+        
+        <button id="btn-profile" class="flex flex-col items-center justify-center text-zinc-400" onclick="showTab('profile')">
+            <span class="material-symbols-outlined">person</span>
+            <span class="text-xs">Profile</span>
+        </button>
+    </nav>
+
+    <script>
+        const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbxJb8ZGEBFA8wciz8NWg5JlAzQxV9KLfVh3LcL4pk335xIF7Gf13_0Bzyi70Ny4tA8nmg/exec';
+        const WHATSAPP_NUMBER = '+201063942602';
+        
+        let openedOrders = new Set();
+
+        async function loadOrders() {
+            try {
+                const detailsElements = document.querySelectorAll('details');
+                detailsElements.forEach(detail => {
+                    const id = detail.getAttribute('data-order-id');
+                    if (detail.hasAttribute('open') && id) {
+                        openedOrders.add(id);
+                    } else if (id) {
+                        openedOrders.delete(id);
+                    }
+                });
+
+                const response = await fetch(`${SHEET_API_URL}?_=${new Date().getTime()}`);
+                const orders = await response.json();
+
+                const pendingContainer = document.getElementById('orders-container');
+                const deliveredContainer = document.getElementById('delivered-container');
+                
+                pendingContainer.innerHTML = ''; 
+                deliveredContainer.innerHTML = ''; 
+
+                if (orders.length === 0) {
+                    pendingContainer.innerHTML = '<p class="text-center text-zinc-500 py-4">لا توجد طلبات حالياً.</p>';
+                    document.getElementById('wallet-total').innerText = '0';
+                    return;
+                }
+
+                let hasPending = false;
+                let hasDelivered = false;
+                let totalWalletAmount = 0; // متغير لحساب إجمالي المحفظة
+
+                orders.forEach(order => {
+                    const orderId = order.orderId || '';
+                    const companyName = order.companyName || '';
+                    const price = order.price || '0';
+                    const area = order.area || '';
+                    const customerName = order.customerName || '';
+                    const phoneNumber = order.phoneNumber || '';
+                    const address = order.address || '';
+                    const mark = order.mark || '-';
+                    const propertyNumber = order.propertyNumber || '-';
+                    const floor = order.floor || '-';
+                    const apartmentNumber = order.apartmentNumber || '-';
+                    
+                    const currentStatus = String(order.status || '').trim();
+
+                    const waMessage = encodeURIComponent(`مرحباً، بخصوص الطلب رقم: ${orderId} للعميل: ${customerName}`);
+                    const isOpen = openedOrders.has(String(orderId)) ? 'open' : '';
+
+                    // الحساب التلقائي للمحفظة 👇 (لو الحالة "تم التسليم" يجمع السعر)
+                    if (currentStatus === "تم التسليم") {
+                        // تنظيف خانة السعر من أي نصوص أو علامات عملات لضمان الجمع الصحيح
+                        const numericPrice = parseFloat(String(price).replace(/[^\d.]/g, '')) || 0;
+                        totalWalletAmount += numericPrice;
+                    }
+
+                    const orderHtml = `
+                        <details ${isOpen} data-order-id="${orderId}" data-status-type="${currentStatus === 'تم التسليم' ? 'delivered' : currentStatus === 'ملغي' ? 'canceled' : 'pending'}" class="bg-white border border-outline-variant shadow-sm group order-item-card">
+                            <summary class="p-4 cursor-pointer">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="flex items-center gap-4">
+                                            <span class="text-[12px] font-bold text-on-surface-variant">اسم الشركة</span>
+                                            <h3 class="text-[14px] font-bold text-primary">${companyName}</h3>
+                                        </div>
+                                        <div class="flex items-center gap-4 mt-1">
+                                            <span class="text-[12px] text-on-surface-variant">سعر الطلب</span>
+                                            <h3 class="text-[14px] text-primary">${price}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <p class="text-[12px] text-on-surface-variant mt-1">${area}</p>
+                                        <span class="material-symbols-outlined transition-transform duration-200 expand-icon text-on-surface-variant">expand_more</span>
+                                    </div>
+                                </div>
+                            </summary>
+                      
+                            <div class="px-4 pb-4 border-t border-dashed border-outline-variant pt-4">
+                                <div class="space-y-4 mb-6">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-start gap-3">
+                                            <div class="bg-surface-container rounded p-1.5">
+                                                <span class="material-symbols-outlined text-[20px] text-on-surface">person</span>
+                                            </div>
+                                            <div>
+                                                <span class="text-[12px] text-on-surface-variant block">اسم العميل</span>
+                                                <p class="text-body-md font-semibold">${customerName}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                             <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}" target="_blank" class="text-green-600 font-bold p-1">
+                                                 <span class="material-symbols-outlined">forum</span>
+                                             </a>
+                                             <div>
+                                                 <span class="text-[12px] text-on-surface-variant block">رقم الطلب</span>
+                                                 <h3 class="text-[14px] text-primary">${orderId}</h3>
+                                             </div>
+                                        </div>
+                                    </div>
+                              
+                                    <div class="flex items-start gap-3">
+                                        <div class="bg-surface-container rounded p-1.5">
+                                            <span class="material-symbols-outlined text-[20px] text-on-surface">call</span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <span class="text-[12px] text-on-surface-variant block">رقم الهاتف</span>
+                                            <p class="text-body-sm">${phoneNumber}</p>
+                                        </div>
+                                        <a href="tel:${phoneNumber}" class="self-center">
+                                            <span class="material-symbols-outlined text-secondary">phone</span>
+                                        </a>
+                                    </div>
+                              
+                                    <div class="flex items-start gap-3">
+                                        <div class="bg-surface-container rounded p-1.5">
+                                            <span class="material-symbols-outlined text-[20px] text-on-surface">location_on</span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <span class="text-[12px] text-on-surface-variant block">عنوان التسليم</span>
+                                            <p class="text-body-sm">${address}</p>
+                                        </div>
+                                    </div>
+                              
+                                    <table class="w-full text-right mt-2 text-sm">
+                                        <thead>
+                                            <tr class="bg-zinc-50 text-on-surface-variant">
+                                                <th class="p-1.5">علامة مميزة</th>
+                                                <th class="p-1.5">رقم العقار</th>
+                                                <th class="p-1.5">الدور</th>
+                                                <th class="p-1.5">الشقة</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="p-1.5">${mark}</td>
+                                                <td class="p-1.5">${propertyNumber}</td>
+                                                <td class="p-1.5">${floor}</td>
+                                                <td class="p-1.5">${apartmentNumber}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                ${currentStatus === "تم التسليم" ? `
+                                    <div class="w-full bg-green-100 text-green-700 text-center py-3 font-bold rounded">
+                                        ✓ تم تسليم الطلب
+                                    </div>
+                                ` : currentStatus === "ملغي" ? `
+                                    <div class="w-full bg-red-100 text-red-700 text-center py-3 font-bold rounded">
+                                        ✕ هذا الطلب ملغي
+                                    </div>
+                                ` : `
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <button onclick="markAsDelivered(event, '${orderId}')" class="w-full bg-black text-white font-button py-4 transition-all active:scale-[0.98]">
+                                            تم التوصيل
+                                        </button>
+                                        <button onclick="markAsCanceled(event, '${orderId}')" class="w-full bg-red-600 text-white font-button py-4 transition-all active:scale-[0.98]">
+                                            طلب ملغي
+                                        </button>
+                                    </div>
+                                `}
+                            </div>
+                        </details>
+                    `;
+
+                    if (currentStatus === "تم التسليم" || currentStatus === "ملغي") {
+                        deliveredContainer.innerHTML += orderHtml;
+                        hasDelivered = true;
+                    } else {
+                        pendingContainer.innerHTML += orderHtml;
+                        hasPending = true;
+                    }
+                });
+
+                if (!hasPending) pendingContainer.innerHTML = '<p class="text-center text-zinc-500 py-4">لا توجد طلبات معلقة.</p>';
+                if (!hasDelivered) deliveredContainer.innerHTML = '<p class="text-center text-zinc-500 py-4">لا توجد طلبات مستلمة أو ملغاة.</p>';
+
+                // تحديث نص قيمة المحفظة الفعلي في الشاشة
+                document.getElementById('wallet-total').innerText = totalWalletAmount.toLocaleString('ae-EG');
+
+                filterDeliveredOrders();
+
+            } catch (error) {
+                console.error("حدث خطأ:", error);
+                document.getElementById('orders-container').innerHTML = '<p class="text-center text-red-500 py-4">فشل في تحميل البيانات.</p>';
+            }
+        }
+
+        function filterDeliveredOrders() {
+            const filterValue = document.getElementById('status-filter').value;
+            const items = document.querySelectorAll('#delivered-container .order-item-card');
+            
+            items.forEach(item => {
+                const itemStatus = item.getAttribute('data-status-type');
+                if (filterValue === 'all') {
+                    item.classList.remove('hidden');
+                } else if (filterValue === itemStatus) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        async function markAsDelivered(event, orderId) {
+            const btn = event.target;
+            btn.innerText = "جاري التحديث...";
+            btn.disabled = true;
+
+            try {
+                await fetch(SHEET_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ orderId: orderId, action: 'deliver' })
+                });
+
+                btn.innerText = "تم التوصيل!";
+                btn.className = "w-full bg-green-600 text-white font-button py-4 text-center rounded";
+
+                setTimeout(() => { loadOrders(); }, 1000);
+            } catch (e) {
+                console.error(e);
+                btn.innerText = "خطأ!";
+                btn.disabled = false;
+            }
+        }
+
+        async function markAsCanceled(event, orderId) {
+            const btn = event.target;
+            btn.innerText = "جاري الإلغاء...";
+            btn.disabled = true;
+
+            try {
+                await fetch(SHEET_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ orderId: orderId, action: 'cancel' })
+                });
+
+                btn.innerText = "تم الإلغاء!";
+                btn.className = "w-full bg-red-800 text-white font-button py-4 text-center rounded";
+
+                setTimeout(() => { loadOrders(); }, 1000);
+            } catch (e) {
+                console.error(e);
+                btn.innerText = "خطأ!";
+                btn.disabled = false;
+            }
+        }
+
+        // دالة عرض الأقسام المعدلة للثلاث تابات بشكل صحيح 👇
+        function showTab(tabName) {
+            const pendingSec = document.getElementById('pending-section');
+            const deliveredSec = document.getElementById('delivered-section');
+            const profileSec = document.getElementById('profile-section');
+            
+            const btnPending = document.getElementById('btn-pending');
+            const btnDelivered = document.getElementById('btn-delivered');
+            const btnProfile = document.getElementById('btn-profile');
+
+            // إخفاء الكل أولاً
+            pendingSec.classList.add('hidden');
+            deliveredSec.classList.add('hidden');
+            profileSec.classList.add('hidden');
+            
+            btnPending.classList.replace('text-[#fd761a]', 'text-zinc-400');
+            btnDelivered.classList.replace('text-[#fd761a]', 'text-zinc-400');
+            btnProfile.classList.replace('text-[#fd761a]', 'text-zinc-400');
+
+            // إظهار التاب المحددة وتلوين زرها
+            if (tabName === 'pending') {
+                pendingSec.classList.remove('hidden');
+                btnPending.classList.replace('text-zinc-400', 'text-[#fd761a]');
+            } else if (tabName === 'delivered') {
+                deliveredSec.classList.remove('hidden');
+                btnDelivered.classList.replace('text-zinc-400', 'text-[#fd761a]');
+            } else if (tabName === 'profile') {
+                profileSec.classList.remove('hidden');
+                btnProfile.classList.replace('text-zinc-400', 'text-[#fd761a]');
+            }
+        }
+
+        window.onload = loadOrders;
+        setInterval(loadOrders, 10000);
+    </script>
 </body>
-
 </html>
