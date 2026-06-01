@@ -170,24 +170,24 @@
                 let totalWalletAmount = 0;
 
                 orders.forEach(order => {
-    const orderId = order.orderId || '';
-    const currentStatus = String(order.status || '').trim();
-    const companyName = order.companyName || '';
-    const officeName = order.officeName || ''; // بيانات جديدة
-    const price = order.price || '0';
-    const area = order.area || '';
-    const customerName = order.customerName || '';
-    const phoneNumber = order.phoneNumber || '';
-    const address = order.address || '';
-    const mark = order.mark || '-';
-    const propertyNumber = order.propertyNumber || '-';
-    const floor = order.floor || '-';
-    const apartmentNumber = order.apartmentNumber || '-';
+                    const orderId = order.orderId || '';
+                    const currentStatus = String(order.status || '').trim();
+                    const companyName = order.companyName || '';
+                    const officeName = order.officeName || ''; // بيانات جديدة
+                    const price = order.price || '0';
+                    const area = order.area || '';
+                    const customerName = order.customerName || '';
+                    const phoneNumber = order.phoneNumber || '';
+                    const address = order.address || '';
+                    const mark = order.mark || '-';
+                    const propertyNumber = order.propertyNumber || '-';
+                    const floor = order.floor || '-';
+                    const apartmentNumber = order.apartmentNumber || '-';
 
                     // 1. تحديد الـ statusType بشكل موحد
                     const statusType = (currentStatus === 'تم التسليم' ? 'delivered' :
                         currentStatus === 'ملغي' ? 'canceled' :
-                        currentStatus === 'مؤجل' ? 'postponed' : 'pending');
+                            currentStatus === 'مؤجل' ? 'postponed' : 'pending');
 
                     const waMessage = encodeURIComponent(`مرحباً، بخصوص الطلب رقم: ${orderId} للعميل: ${customerName}`);
                     const isOpen = openedOrders.has(String(orderId)) ? 'open' : '';
@@ -217,12 +217,11 @@
 
                                         <div class="flex flex-col">
                                             <div>
-                                                <span id="status-badge-${orderId}" class="text-[10px] px-2 py-1 rounded font-bold ${
-                                                    currentStatus === 'تم التسليم' ? 'bg-green-100 text-green-800' :
-                                                    currentStatus === 'ملغي' ? 'bg-red-100 text-red-800' :
-                                                    currentStatus === 'مؤجل' ? 'bg-amber-100 text-amber-800' :
-                                                    'bg-orange-50 text-zinc-800 border border-zinc-200'
-                                                }">
+                                                <span id="status-badge-${orderId}" class="text-[10px] px-2 py-1 rounded font-bold ${currentStatus === 'تم التسليم' ? 'bg-green-100 text-green-800' :
+                            currentStatus === 'ملغي' ? 'bg-red-100 text-red-800' :
+                                currentStatus === 'مؤجل' ? 'bg-amber-100 text-amber-800' :
+                                    'bg-orange-50 text-zinc-800 border border-zinc-200'
+                        }">
                                                     ${currentStatus === '' || currentStatus === 'undefined' ? 'جاري المعالجة' : currentStatus}
                                                 </span>
                                             </div>
@@ -320,7 +319,7 @@
                                 ` : `
                                 <div class="flex grid-cols-1 gap-2">
                                     <button onclick="markAsDelivered(event, '${orderId}')" class="w-full bg-black text-white font-button py-3 transition-all active:scale-[0.98]">
-                                        تم التوصيل
+                                        تم التسليم
                                     </button>
                                     <button onclick="markAsPostponed(event, '${orderId}')" class="w-full bg-amber-600 text-white font-button py-3 transition-all active:scale-[0.98]">
                                         تأجيل
@@ -347,7 +346,7 @@
                 if (!hasDelivered) deliveredContainer.innerHTML = '<p class="text-center text-zinc-500 py-4">لا توجد طلبات مستلمة أو ملغاة.</p>';
 
                 document.getElementById('wallet-total').innerText = totalWalletAmount.toLocaleString('ae-EG');
-
+ب
                 filterDeliveredOrders();
 
             } catch (error) {
@@ -385,7 +384,7 @@
                     body: JSON.stringify({ orderId: orderId, action: 'deliver' })
                 });
 
-                btn.innerText = "تم التوصيل!";
+                btn.innerText = "تم التسليم!";
                 btn.className = "w-full bg-green-600 text-white font-button py-4 text-center rounded";
 
                 setTimeout(() => { loadOrders(); }, 1000);
@@ -443,33 +442,34 @@
                 btn.disabled = false;
             }
         }
-
         function showTab(tabName) {
-            const pendingSec = document.getElementById('pending-section');
-            const deliveredSec = document.getElementById('delivered-section');
-            const profileSec = document.getElementById('profile-section');
+            // إخفاء جميع الأقسام
+            document.getElementById('pending-section').classList.add('hidden');
+            document.getElementById('delivered-section').classList.add('hidden');
+            document.getElementById('profile-section').classList.add('hidden');
 
-            const btnPending = document.getElementById('btn-pending');
-            const btnDelivered = document.getElementById('btn-delivered');
-            const btnProfile = document.getElementById('btn-profile');
+            // إعادة تعيين ألوان جميع الأزرار
+            const buttons = {
+                'pending': document.getElementById('btn-pending'),
+                'delivered': document.getElementById('btn-delivered'),
+                'profile': document.getElementById('btn-profile')
+            };
 
-            pendingSec.classList.add('hidden');
-            deliveredSec.classList.add('hidden');
-            profileSec.classList.add('hidden');
+            Object.keys(buttons).forEach(key => {
+                buttons[key].classList.remove('text-[#fd761a]');
+                buttons[key].classList.add('text-zinc-400');
+            });
 
-            btnPending.classList.replace('text-[#fd761a]', 'text-zinc-400');
-            btnDelivered.classList.replace('text-[#fd761a]', 'text-zinc-400');
-            btnProfile.classList.replace('text-[#fd761a]', 'text-zinc-400');
-
+            // إظهار القسم المطلوب وتفعيل الزر
             if (tabName === 'pending') {
-                pendingSec.classList.remove('hidden');
-                btnPending.classList.replace('text-zinc-400', 'text-[#fd761a]');
+                document.getElementById('pending-section').classList.remove('hidden');
+                buttons['pending'].classList.replace('text-zinc-400', 'text-[#fd761a]');
             } else if (tabName === 'delivered') {
-                deliveredSec.classList.remove('hidden');
-                btnDelivered.classList.replace('text-zinc-400', 'text-[#fd761a]');
+                document.getElementById('delivered-section').classList.remove('hidden');
+                buttons['delivered'].classList.replace('text-zinc-400', 'text-[#fd761a]');
             } else if (tabName === 'profile') {
-                profileSec.classList.remove('hidden');
-                btnProfile.classList.replace('text-zinc-400', 'text-[#fd761a]');
+                document.getElementById('profile-section').classList.remove('hidden');
+                buttons['profile'].classList.replace('text-zinc-400', 'text-[#fd761a]');
             }
         }
 
