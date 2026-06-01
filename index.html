@@ -170,23 +170,24 @@
                 let totalWalletAmount = 0;
 
                 orders.forEach(order => {
-                    const orderId = order.orderId || '';
-                    const currentStatus = String(order.status || '').trim();
-                    const companyName = order.companyName || '';
-                    const price = order.price || '0';
-                    const area = order.area || '';
-                    const customerName = order.customerName || '';
-                    const phoneNumber = order.phoneNumber || '';
-                    const address = order.address || '';
-                    const mark = order.mark || '-';
-                    const propertyNumber = order.propertyNumber || '-';
-                    const floor = order.floor || '-';
-                    const apartmentNumber = order.apartmentNumber || '-';
+    const orderId = order.orderId || '';
+    const currentStatus = String(order.status || '').trim();
+    const companyName = order.companyName || '';
+    const officeName = order.officeName || ''; // بيانات جديدة
+    const price = order.price || '0';
+    const area = order.area || '';
+    const customerName = order.customerName || '';
+    const phoneNumber = order.phoneNumber || '';
+    const address = order.address || '';
+    const mark = order.mark || '-';
+    const propertyNumber = order.propertyNumber || '-';
+    const floor = order.floor || '-';
+    const apartmentNumber = order.apartmentNumber || '-';
 
                     // 1. تحديد الـ statusType بشكل موحد
                     const statusType = (currentStatus === 'تم التسليم' ? 'delivered' :
                         currentStatus === 'ملغي' ? 'canceled' :
-                            currentStatus === 'مؤجل' ? 'postponed' : 'pending');
+                        currentStatus === 'مؤجل' ? 'postponed' : 'pending');
 
                     const waMessage = encodeURIComponent(`مرحباً، بخصوص الطلب رقم: ${orderId} للعميل: ${customerName}`);
                     const isOpen = openedOrders.has(String(orderId)) ? 'open' : '';
