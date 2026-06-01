@@ -147,7 +147,7 @@
 
                 let hasPending = false;
                 let hasDelivered = false;
-                let totalWalletAmount = 0; // متغير لحساب إجمالي المحفظة
+                let totalWalletAmount = 0; 
 
                 orders.forEach(order => {
                     const orderId = order.orderId || '';
@@ -167,11 +167,19 @@
                     const waMessage = encodeURIComponent(`مرحباً، بخصوص الطلب رقم: ${orderId} للعميل: ${customerName}`);
                     const isOpen = openedOrders.has(String(orderId)) ? 'open' : '';
 
-                    // الحساب التلقائي للمحفظة 👇 (لو الحالة "تم التسليم" يجمع السعر)
                     if (currentStatus === "تم التسليم") {
-                        // تنظيف خانة السعر من أي نصوص أو علامات عملات لضمان الجمع الصحيح
                         const numericPrice = parseFloat(String(price).replace(/[^\d.]/g, '')) || 0;
                         totalWalletAmount += numericPrice;
+                    }
+
+                    // 1. تحديد شارة الحالة في الـ summary بناءً على القيمة القادمة من الاسكريبت دوت
+                    let statusBadgeHtml = '';
+                    if (currentStatus === "تم التسليم") {
+                        statusBadgeHtml = `<span class="inline-flex items-center gap-1 bg-green-50 text-green-700 text-[11px] font-bold px-2 py-0.5 rounded border border-green-200">✓ تم التسليم</span>`;
+                    } else if (currentStatus === "ملغي") {
+                        statusBadgeHtml = `<span class="inline-flex items-center gap-1 bg-red-50 text-red-700 text-[11px] font-bold px-2 py-0.5 rounded border border-red-200">✕ ملغي</span>`;
+                    } else {
+                        statusBadgeHtml = `<span class="inline-flex items-center gap-1 bg-amber-50 text-amber-700 text-[11px] font-bold px-2 py-0.5 rounded border border-amber-200">قيد الانتظار</span>`;
                     }
 
                     const orderHtml = `
@@ -181,7 +189,10 @@
                                     <div>
                                         <div class="flex items-center gap-4">
                                             <span class="text-[12px] font-bold text-on-surface-variant">اسم الشركة</span>
-                                            <h3 class="text-[14px] font-bold text-primary">${companyName}</h3>
+                                            <div class="flex items-center gap-2">
+                                                <h3 class="text-[14px] font-bold text-primary">${companyName}</h3>
+                                                ${statusBadgeHtml}
+                                            </div>
                                         </div>
                                         <div class="flex items-center gap-4 mt-1">
                                             <span class="text-[12px] text-on-surface-variant">سعر الطلب</span>
@@ -295,7 +306,6 @@
                 if (!hasPending) pendingContainer.innerHTML = '<p class="text-center text-zinc-500 py-4">لا توجد طلبات معلقة.</p>';
                 if (!hasDelivered) deliveredContainer.innerHTML = '<p class="text-center text-zinc-500 py-4">لا توجد طلبات مستلمة أو ملغاة.</p>';
 
-                // تحديث نص قيمة المحفظة الفعلي في الشاشة
                 document.getElementById('wallet-total').innerText = totalWalletAmount.toLocaleString('ae-EG');
 
                 filterDeliveredOrders();
@@ -370,7 +380,6 @@
             }
         }
 
-        // دالة عرض الأقسام المعدلة للثلاث تابات بشكل صحيح 👇
         function showTab(tabName) {
             const pendingSec = document.getElementById('pending-section');
             const deliveredSec = document.getElementById('delivered-section');
@@ -380,7 +389,6 @@
             const btnDelivered = document.getElementById('btn-delivered');
             const btnProfile = document.getElementById('btn-profile');
 
-            // إخفاء الكل أولاً
             pendingSec.classList.add('hidden');
             deliveredSec.classList.add('hidden');
             profileSec.classList.add('hidden');
@@ -389,7 +397,6 @@
             btnDelivered.classList.replace('text-[#fd761a]', 'text-zinc-400');
             btnProfile.classList.replace('text-[#fd761a]', 'text-zinc-400');
 
-            // إظهار التاب المحددة وتلوين زرها
             if (tabName === 'pending') {
                 pendingSec.classList.remove('hidden');
                 btnPending.classList.replace('text-zinc-400', 'text-[#fd761a]');
@@ -407,3 +414,4 @@
     </script>
 </body>
 </html>
+
